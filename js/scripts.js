@@ -83,6 +83,7 @@ var playerPickElem = document.getElementById('js-playerPick'),
 	computerPickElem = document.getElementById('js-computerPick'),
 	playerResultElem = document.getElementById('js-playerResult'),
 	computerResultElem = document.getElementById('js-computerResult');
+
 function playerPick(playerPick) {
 	var computerPick = getComputerPick();
     
@@ -96,27 +97,36 @@ function checkRoundWinner(playerPick, computerPick) {
 
 	var winnerIs = 'player';
 
-		if (playerPick == computerPick) {
-			winnerIs = 'noone'; // remis
-		} else if (
-			(computerPick == 'rock' &&  playerPick == 'scissors') ||
-			(computerPick == 'scissors' &&  playerPick == 'paper') ||
-			(computerPick == 'paper' &&  playerPick == 'rock') ) {
+	if (playerPick == computerPick) {
+		winnerIs = 'noone'; // remis
 
-			winnerIs = 'computer';
-		}
+	playerResultElem.innerHTML = "Remis!";
+	computerResultElem.innerHTML = "Remis!";
 
-		if (winnerIs == 'player') {
-			playerResultElem.innerHTML = "Wygrana!";
-			playerPointsElem.innerHTML = player.score++; // tutaj dodalam "playerPointsElem.innerHTML =", czego nie bylo w zadaniu - inacej punkty nie chcialy sie naliczac
-		} else if (winnerIs == 'computer') {
-			computerResultElem.innerHTML = "Wygrana!";
-			computerPickElem.innerHTML = computer.score++; // tutaj dodalam "computerPickElem.innerHTML =", czego nie bylo w zadaniu - inacej punkty nie chcialy sie naliczac
-		}
+	} else if (
+		(computerPick == 'rock' &&  playerPick == 'scissors') ||
+		(computerPick == 'scissors' &&  playerPick == 'paper') ||
+		(computerPick == 'paper' &&  playerPick == 'rock') ) {
+
+		winnerIs = 'computer';
+	}
+
+	if (winnerIs == 'player') {
+		playerResultElem.innerHTML = "Wygrana!";
+		player.score++; // tutaj dodalam "playerPointsElem.innerHTML =", czego nie bylo w zadaniu - inacej punkty nie chcialy sie naliczac
+	} else if (winnerIs == 'computer') {
+		computerResultElem.innerHTML = "Wygrana!";
+		computer.score++; // tutaj dodalam "computerPickElem.innerHTML =", czego nie bylo w zadaniu - inacej punkty nie chcialy sie naliczac
+	}
+
+	setGamePoints()
+	checkSetWinner()
 
 }
 
 function playerPick(playerPick) {
+	if (setWinnerIs)
+		return
 	var computerPick = getComputerPick();
 
 	playerPickElem.innerHTML = playerPick;
@@ -130,15 +140,15 @@ function setGamePoints() {
 	playerPointsElem.innerHTML = player.score;
 	computerPointsElem.innerHTML = computer.score;
 }
-
+var setWinnerIs;
 // SPRAWDZENIE CZY KTORYS Z GRACZY ZDOBYL 10 PUKTOW
-/*function checkSetWinner(playerPick, computerPick) {
-	var setWinnerIs = 'player';
-
+function checkSetWinner() {
+	
 		if (player.score == 10) {
 			setWinnerIs = 'player';
 			playerResultElem.innerHTML = "Wygrana gry!";
-		} else if (computer.score == 10)
+		} else if (computer.score == 10) {
 			setWinnerIs = 'computer';
 			computerResultElem.innerHTML = "Wygrana gry!";
-}*/
+		}
+}
