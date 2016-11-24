@@ -61,6 +61,8 @@ function newGame() {
 
 		playerNameElem.innerHTML = player.name;
 		setGamePoints();
+
+		setWinnerIs = false;
 	}
 
 }
