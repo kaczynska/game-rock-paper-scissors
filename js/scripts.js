@@ -151,4 +151,6 @@ function checkSetWinner() {
 			setWinnerIs = 'computer';
 			computerResultElem.innerHTML = "Wygrana gry!";
 		}
+
 }
+newGame() 
